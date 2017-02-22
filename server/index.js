@@ -13,7 +13,7 @@ app.use('/public', express.static(path.join(__dirname, '../public'))); //Make pu
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://pure-scrubland-33447.herokuapp.com/');
+    res.setHeader('Access-Control-Allow-Origin', 'https://pure-scrubland-33447.herokuapp.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
