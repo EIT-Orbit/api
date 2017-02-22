@@ -18,8 +18,8 @@ function createBinary (req, res) {
   intArray[0] = points.length-1; //first int in stream will tell how many points are in the stream
   var pos = 0;
   for(var i=0; i<points.length-1; i++){
-    var latAsInt = parseInt(points[i][0] * Math.pow(10, 6));
-    var lonAsInt = parseInt(points[i][1] * Math.pow(10, 6));
+    var latAsInt = parseInt(points[i][0] * Math.pow(10, 7));
+    var lonAsInt = parseInt(points[i][1] * Math.pow(10, 7));
     intArray[pos+1] = latAsInt;
     intArray[pos+2] = lonAsInt;
     pos+=2;
