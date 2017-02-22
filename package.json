@@ -1,0 +1,22 @@
+{
+  "name": "Orbit api",
+  "version": "1.0.0",
+  "description": "EIT project api",
+  "main": "server",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": "6.9.4"
+  },
+  "scripts": {
+    "start": "node server"
+  }
+}
