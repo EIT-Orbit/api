@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/api', router());
-
-app.listen(serverConfig.PORT, function () {
-  console.log('Example app listening on port ' + serverConfig.PORT + '!')
+var server_port = process.env.PORT || serverConfig.PORT;
+app.listen(server_port, function () {
+  console.log('Example app listening on port ' + server_port + '!')
 })
