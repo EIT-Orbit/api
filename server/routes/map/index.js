@@ -13,6 +13,7 @@ module.exports = function () {
 };
 
 function createBinary (req, res) {
+  console.log(req.body.features[0].geometry.coordinates);
   var points = req.body.features[0].geometry.coordinates[0];
   const intArray = new Uint32Array((points.length-1)*2 + 1); //remove last point as it is same as first for a polygon. add 1 as first item in the array should be the
   intArray[0] = points.length-1; //first int in stream will tell how many points are in the stream
@@ -27,15 +28,15 @@ function createBinary (req, res) {
 
   var buf = Buffer.from(intArray.buffer, 0, intArray.buffer.length);
 
-  var filePath = path.resolve('./public/binary');
+  var filePath = path.resolve('./public/fence');
 
-  fs.writeFile(filePath, buf, 'binary', function(err){
+  fs.writeFile(filePath, buf, function(err){
     if(err) {
       console.log(err);
     };
   });
 
-  return res.status(200).json({url: serverConfig.ROOT_URL+'public/binary'});
+  return res.status(200).json({url: serverConfig.ROOT_URL+'public/fence'});
 
   fs.open('binary.orbit', 'r', function(status, fd){
     var buffer = new Buffer(intArray.length);
@@ -44,13 +45,13 @@ function createBinary (req, res) {
     })
   });
 
-  var stat = fs.statSync('binary.orbit');
+  var stat = fs.statSync('fence');
   res.writeHead(200, {
     'Content-Type': 'text/utf-8',
     'Content-Length': stat.size
   });
 
-  var readStream = fs.createReadStream('binary');
+  var readStream = fs.createReadStream('fence');
   // We replaced all the event handlers with a simple call to readStream.pipe()
   readStream.pipe(res);
 }

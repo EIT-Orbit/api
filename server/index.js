@@ -4,16 +4,25 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var router = require('./routes');
 var serverConfig = require('./config/server.config');
+var mongoose = require('mongoose');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, colorize: true}));
 
 app.use('/public', express.static(path.join(__dirname, '../public'))); //Make public folder public accessible
 
+if (mongoose.connection.readyState === 0) {
+	mongoose.connect('mongodb://localhost/orbit', function (err) {
+		if (err) console.log(err);
+	});
+};
+
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://pure-scrubland-33447.herokuapp.com');
+    //res.setHeader('Access-Control-Allow-Origin', 'https://pure-scrubland-33447.herokuapp.com');
+		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
