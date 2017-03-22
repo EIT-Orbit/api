@@ -7,7 +7,7 @@ module.exports = function () {
   router.post('/fences',
       login.middleware.validateToken,
       middleware.validateFencePostRequest,
-      middleware.parseGeojson,
+      //middleware.parseGeojson,
       middleware.saveFence
   );
 
