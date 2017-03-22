@@ -19,7 +19,7 @@ module.exports = {
   parseGeojson: function(req, res, next){
     var parsedPoints = [];
     var points = req.body.features[0].geometry.coordinates[0];
-    for(var i=0; i<points.length-1; i++){
+    for(var i=0; i<points.length; i++){
       parsedPoints.push({
         lat: points[i][1],
         lon: points[i][0]
