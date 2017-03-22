@@ -41,15 +41,13 @@ module.exports = {
   	};
   	return res.status(200).json(data);
   },
-  validateToken: function(req, res, next){
-    if (!req.header('Authorization')) return res.status(401).json({message: 'Authorization header missing'});
-	  jwt.verify(req.header('Authorization'), config.secret, function (err, verified) {
-		    if (err) return res.status(401).json({message: err.message});
-	      if (verified.type !== config.types.access_token) return res.status(401).json({message: 'Not an access token.'});
-		else {
-			req.verified = verified;
-			next();
-		}
-	});
-  }
+    validateToken: function(req, res, next){
+        if (!req.header('Authorization')) return res.status(401).json({message: 'Authorization header missing'});
+        jwt.verify(req.header('Authorization'), config.secret, function (err, verified) {
+            if (err) return res.status(401).json({message: err.message});
+            if (verified.type !== config.types.access_token) return res.status(401).json({message: 'Not an access token.'});
+            req.verified = verified;
+            next();
+        });
+    }
 }

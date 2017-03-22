@@ -13,8 +13,12 @@ module.exports = function () {
 };
 
 function createBinary (req, res) {
-  console.log(req.body.features[0].geometry.coordinates);
-  var points = req.body.features[0].geometry.coordinates[0];
+  var points;
+  if(req.body.geometry){
+      points = req.body.geometry.coordinates[0];
+  }else{
+      points = req.body.features[0].geometry.coordinates[0];
+  }
   const intArray = new Uint32Array((points.length-1)*2 + 1); //remove last point as it is same as first for a polygon. add 1 as first item in the array should be the
   intArray[0] = points.length-1; //first int in stream will tell how many points are in the stream
   var pos = 0;

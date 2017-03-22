@@ -8,7 +8,7 @@ module.exports = {
   },
   saveFence: function(req, res){
     var newFence = new fenceSchema(req.body);
-    newFence.ownerId = req.verified.id;
+    newFence.ownerId = req.verified.userId;
     newFence.name = req.body.fenceName;
     newFence.geoJSON = req.body.geoJSON;
     newFence.save(function(err){
@@ -31,7 +31,7 @@ module.exports = {
   },
   */
   returnFencesForCurrentUser: function(req, res){
-    fenceSchema.find({ownerId: req.verified.id}, function(err, fences){
+    fenceSchema.find({ownerId: req.verified.userId}, function(err, fences){
       if(err) return res.status(500).json({message: 'error retrieving fences'});
       return res.status(200).json(fences);
     })
